@@ -1,8 +1,14 @@
+"use client";
+
+import { useEffect } from "react";
+
 export default function Home() {
+  useEffect(() => {
+    console.log("API URL:", process.env.NEXT_PUBLIC_WORDPRESS_API_URL);
+  }, []);
+
   return (
     <div className="p-4 text-center">
-      <h2 className="text-3xl font-bold">Welcome to My Next.js App</h2>
-      <p className="text-gray-600">This is a test page.</p>
-    </div>
+      </div>
   );
 }
