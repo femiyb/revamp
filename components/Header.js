@@ -5,11 +5,11 @@ export default function Header() {
           {/* Logo Section */}
           <div className="flex items-center space-x-2">
             <img
-              src="https://femi-yb-staging.local/wp-content/uploads/2021/10/cropped-Femi-1.png" // Replace with your logo file path
+              src="https://www.femiyb.com/wp-content/uploads/2021/10/cropped-Femi-1.png" // Replace with your logo file path
               alt="Clued YB Logo"
               className="h-8 w-8"
             />
-            <span className="text-lg font-bold text-black">Clued YB</span>
+            <span className="text-lg font-bold text-black">Femi YB</span>
           </div>
   
           {/* Navigation Links */}
