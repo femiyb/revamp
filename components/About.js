@@ -27,7 +27,7 @@ export default function AboutMe() {
           {/* Right Image */}
           <div className="mt-8 md:mt-0 md:w-1/2">
             <img
-              src="/about-me-image.png" // Replace with your actual image path
+              src="https://www.femiyb.com/wp-content/uploads/2021/10/FemiYB-1024x858.png" // Replace with your actual image path
               alt="About Me Illustration"
               className="w-full h-auto"
             />

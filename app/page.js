@@ -1,14 +1,21 @@
-"use client";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Hero from "@/components/Hero";
+import AboutMe from "@/components/About";
+import Skills from "@/components/Skills";
+import BlogPreview from "@/components/BlogPreview";
 
-import { useEffect } from "react";
-
-export default function Home() {
-  useEffect(() => {
-    console.log("API URL:", process.env.NEXT_PUBLIC_WORDPRESS_API_URL);
-  }, []);
-
+export default function RootLayout({ children }) {
   return (
-    <div className="p-4 text-center">
-      </div>
+    <html lang="en">
+      <body className="flex flex-col min-h-screen">
+        <Header />
+        <Hero />
+        <AboutMe />
+        <Skills />
+        <BlogPreview />
+
+      </body>
+    </html>
   );
 }
