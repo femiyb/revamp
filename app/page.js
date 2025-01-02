@@ -1,21 +1,19 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Hero from "@/components/Hero";
-import AboutMe from "@/components/About";
-import Skills from "@/components/Skills";
-import BlogPreview from "@/components/BlogPreview";
+import Header from "../components/common/Header";
+import Footer from "../components/common/Footer";
+import Hero from "@/components/home/Hero";
+import AboutMe from "@/components/home/AboutSummary";
+import Skills from "@/components/home/SkillsPreview";
+import BlogPreview from "@/components/home/BlogPreview";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="flex flex-col min-h-screen">
-        <Header />
+    <>
+    <main className="flex flex-col min-h-screen">
         <Hero />
         <AboutMe />
         <Skills />
         <BlogPreview />
-
-      </body>
-    </html>
+        </main>
+</>
   );
 }
