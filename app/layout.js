@@ -1,22 +1,13 @@
 import "../styles/globals.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Hero from "@/components/Hero";
-import AboutMe from "@/components/About";
-import Skills from "@/components/Skills";
-import BlogPreview from "@/components/BlogPreview";
+import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen">
+      <body className="bg-gray-100">
         <Header />
-        <Hero />
-        <AboutMe />
-        <Skills />
-        <BlogPreview />
-        <main className="flex-grow">{children}</main>
-
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
