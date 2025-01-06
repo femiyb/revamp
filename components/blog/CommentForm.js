@@ -26,7 +26,7 @@ export default function CommentForm({ postId }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            post: postId, // The ID of the post for which the comment is being submitted
+            post: postId,
             author_name: formData.name,
             author_email: formData.email,
             content: formData.comment,
