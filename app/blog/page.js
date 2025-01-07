@@ -1,17 +1,14 @@
-import Header from "@/components/common/Header";
-import Footer from "@/components/common/Footer";
-import BlogPreview from "@/components/home/BlogPreview";
 import BlogContainer from "@/components/blog/BlogContainer";
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp/v2/posts`, {
+    cache: "no-store", // Use "force-cache" or "revalidate" for caching behavior
+  });
+  const posts = await res.json();
+
   return (
-    <>
-      <main className="py-16 px-4 bg-gray-50">
-        <h1 className="text-4xl font-bold text-center text-teal-500 mb-8">
-          Blog Page
-        </h1>
-        <BlogContainer />
-      </main>
-    </>
+    <div className="py-16">
+      <BlogContainer posts={posts} />
+    </div>
   );
 }
