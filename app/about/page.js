@@ -1,14 +1,13 @@
-import Header from "@/components/common/Header";
-import Footer from "@/components/common/Footer";
+import AboutHero from "@/components/about/AboutHero";
+import AboutIntro from "@/components/about/AboutIntro";
+import AboutContent from "@/components/about/AboutContent";
 
 export default function AboutPage() {
   return (
     <>
-      <main className="py-16 px-4 bg-gray-50">
-        <h1 className="text-4xl font-bold text-center text-teal-500 mb-8">
-          About Page
-        </h1>
-      </main>
+      <AboutHero />
+      <AboutIntro />
+      <AboutContent />
     </>
   );
 }
