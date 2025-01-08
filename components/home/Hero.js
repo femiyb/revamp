@@ -7,8 +7,8 @@ export default function Hero() {
         {/* Left Image Section */}
         <div className="md:w-1/3 flex justify-center">
           <img
-            src="https://www.femiyb.com/wp-content/uploads/2025/01/samuel-femi-taiwo_original-e1736284460605.png"
-            alt="Femi's Illustration"
+            src="/assets/images/samuel-femi-taiwo_original-e1736284460605.png"
+            alt="Femi's Illustration" 
             className="w-full h-auto max-w-sm"
           />
         </div>
