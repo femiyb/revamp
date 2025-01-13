@@ -1,14 +1,16 @@
-console.log("Image Proxy Route Triggered");
-
-
 import { NextResponse } from "next/server";
 
-export async function GET(req, { params }) {
-  const { path } = params;
+// Handle the GET request
+export async function GET(req) {
+  const { searchParams } = new URL(req.url);
+  const imagePath = searchParams.get("path");
 
-  // Rebuild the WordPress image URL
-  const imageUrl = `https://www.femiyb.com/wp-content/uploads/${path.join("/")}`;
-  console.log("Fetching image from:", imageUrl);  // This MUST appear!
+  if (!imagePath) {
+    return NextResponse.json({ error: "Image path is missing" }, { status: 400 });
+  }
+
+  const imageUrl = `https://www.femiyb.com/wp-content/uploads/${imagePath}`;
+  console.log("Fetching image from:", imageUrl);  // Debugging log
 
   try {
     const response = await fetch(imageUrl);

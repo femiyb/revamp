@@ -42,10 +42,10 @@ export default async function BlogPostPage({ params }) {
     return <div>Post not found.</div>;
   }
 
-// Replace WordPress URLs with the correct local proxy
+// Replace WordPress image URLs with the React app proxy URL
 const updatedContent = post.content.rendered.replace(
   /https:\/\/www\.femiyb\.com\/wp-content\/uploads\/([^">]+)/g,
-  (match, path) => `/api/images/${path}`
+  (match, path) => `/api/images?path=${path}`
 );
 
 
