@@ -1,36 +1,34 @@
 import { NextResponse } from "next/server";
 
-// Handle the GET request
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
-  const imagePath = searchParams.get("path");
+  const path = searchParams.get("path");
 
-  if (!imagePath) {
-    return NextResponse.json({ error: "Image path is missing" }, { status: 400 });
+  // Security: Prevent path traversal attacks
+  if (!path || path.includes("..")) {
+    return NextResponse.json({ error: "Invalid image path" }, { status: 400 });
   }
 
-  const imageUrl = `https://www.femiyb.com/wp-content/uploads/${imagePath}`;
-  console.log("Fetching image from:", imageUrl);  // Debugging log
+  const imageUrl = `https://www.femiyb.com/wp-content/uploads/${path}`;
 
   try {
     const response = await fetch(imageUrl);
 
     if (!response.ok) {
-      console.error(`Failed to fetch image. Status: ${response.status}`);
-      return new NextResponse("Failed to fetch image", { status: response.status });
+      return NextResponse.json({ error: "Image not found" }, { status: 404 });
     }
 
-    const imageBuffer = await response.arrayBuffer();
-    const contentType = response.headers.get("content-type") || "image/jpeg";
+    const buffer = await response.arrayBuffer();
 
-    return new NextResponse(imageBuffer, {
+    return new Response(buffer, {
       status: 200,
       headers: {
-        "Content-Type": contentType,
+        "Content-Type": response.headers.get("content-type"),
+        "Cache-Control": "public, max-age=31536000, immutable",  // Caching
       },
     });
   } catch (error) {
-    console.error("Error fetching image:", error.message);
-    return new NextResponse("Error fetching image", { status: 500 });
+    console.error("Error fetching image:", error);
+    return NextResponse.json({ error: "Error fetching image" }, { status: 500 });
   }
 }

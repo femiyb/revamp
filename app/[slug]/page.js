@@ -45,7 +45,7 @@ export default async function BlogPostPage({ params }) {
 // Replace WordPress image URLs with the React app proxy URL
 const updatedContent = post.content.rendered.replace(
   /https:\/\/www\.femiyb\.com\/wp-content\/uploads\/([^">]+)/g,
-  (match, path) => `/api/images?path=${path}`
+  (match, path) => `/api/images?path=${encodeURIComponent(path)}`
 );
 
 
