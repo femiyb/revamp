@@ -4,7 +4,6 @@ export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const path = searchParams.get("path");
 
-  // Security: Prevent path traversal attacks
   if (!path || path.includes("..")) {
     return NextResponse.json({ error: "Invalid image path" }, { status: 400 });
   }
@@ -24,7 +23,7 @@ export async function GET(req) {
       status: 200,
       headers: {
         "Content-Type": response.headers.get("content-type"),
-        "Cache-Control": "public, max-age=31536000, immutable",  // Caching
+        "Cache-Control": "public, max-age=31536000, immutable",
       },
     });
   } catch (error) {
