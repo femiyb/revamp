@@ -1,4 +1,4 @@
-// File: components/blog/BlogContainer.js
+"use client";  // Required for interactivity if any
 
 export default function BlogContainer({ posts }) {
   return (
@@ -7,25 +7,49 @@ export default function BlogContainer({ posts }) {
         <h1 className="text-3xl md:text-4xl font-bold text-teal-500 mb-8 text-center">
           Blog Posts
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {posts.map((post) => (
-            <div
-              key={post.id}
-              className="p-6 bg-gray-100 shadow rounded-lg hover:shadow-lg transition"
-            >
-              <h3 className="text-xl font-bold mb-2">{post.title.rendered}</h3>
-              <p
-                className="text-gray-600 mb-4"
-                dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-              ></p>
+
+        {/* Responsive Grid for Posts */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post) => {
+            // Proxy the featured image through the React app
+            const rawImage =
+              post._embedded?.['wp:featuredmedia']?.[0]?.source_url || "/default-image.jpg";
+
+            const featuredImage = rawImage.includes("femiyb.com")
+              ? `/api/images?path=${encodeURIComponent(
+                  rawImage.replace("https://www.femiyb.com/wp-content/uploads/", "")
+                )}`
+              : rawImage;
+
+            return (
               <a
+                key={post.id}
                 href={`/${post.slug}`}
-                className="text-teal-500 font-bold hover:underline"
+                className="relative group block overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300"
               >
-                Read More
+                {/* Featured Image */}
+                <img
+                  src={featuredImage}
+                  alt={post.title.rendered}
+                  className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-300"
+                />
+
+                {/* Dark Overlay with Post Title */}
+                <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <h3 className="text-xl font-extrabold text-white leading-tight mb-2">
+                    {post.title.rendered}
+                  </h3>
+                  <p className="text-gray-300 text-sm">
+                    {new Date(post.date).toLocaleDateString(undefined, {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </p>
+                </div>
               </a>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

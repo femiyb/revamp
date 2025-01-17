@@ -1,18 +1,14 @@
 import CommentForm from "@/components/blog/CommentForm";
 import CommentList from "@/components/blog/CommentList";
 
-// Generate static params for pre-rendering blog posts
 export async function generateStaticParams() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp/v2/posts`);
-
+    const res = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp/v2/posts?_embed`);
     if (!res.ok) {
       console.error("Failed to fetch posts:", res.statusText);
       return [];
     }
-
     const posts = await res.json();
-
     return posts.map((post) => ({
       slug: post.slug,
     }));
@@ -25,9 +21,8 @@ export async function generateStaticParams() {
 export default async function BlogPostPage({ params }) {
   const { slug } = params;
 
-  // Fetch the individual blog post by slug
   const postRes = await fetch(
-    `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp/v2/posts?slug=${slug}`
+    `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp/v2/posts?slug=${slug}&_embed`
   );
 
   if (!postRes.ok) {
@@ -42,31 +37,54 @@ export default async function BlogPostPage({ params }) {
     return <div>Post not found.</div>;
   }
 
-// Replace WordPress image URLs with the React app proxy URL
-const updatedContent = post.content.rendered.replace(
-  /https:\/\/www\.femiyb\.com\/wp-content\/uploads\/([^">]+)/g,
-  (match, path) => `/api/images?path=${encodeURIComponent(path)}`
-);
+  const rawImage = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "/default-image.jpg";
 
+  const featuredImage = rawImage.includes("femiyb.com")
+    ? `/api/images?path=${encodeURIComponent(
+        rawImage.replace("https://www.femiyb.com/wp-content/uploads/", "")
+      )}`
+    : rawImage;
+
+  const updatedContent = post.content.rendered.replace(
+    /https:\/\/www\.femiyb\.com\/wp-content\/uploads\/([^">]+)/g,
+    (match, path) => `/api/images?path=${encodeURIComponent(path)}`
+  );
 
   return (
-    <article className="py-16 bg-white">
-      <div className="max-w-5xl mx-auto px-4">
-        <h1 className="text-4xl font-bold text-teal-500 mb-6">
-          {post.title.rendered}
-        </h1>
+    <div className="post-container">
+      <article className="post-article">
+        {/* Post Title */}
+        <h1 className="post-title">{post.title.rendered}</h1>
 
-        {/* Updated blog content with proxied and lazy-loaded images */}
+        {/* Post Date */}
+        <p className="post-date">
+          {new Date(post.date).toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
+
+        {/* Featured Image */}
+        <img
+          src={featuredImage}
+          alt={post.title.rendered}
+          className="featured-image"
+        />
+
+        {/* Post Content */}
         <div
-          className="prose max-w-none mb-8"
+          className="post-content"
           dangerouslySetInnerHTML={{ __html: updatedContent }}
         ></div>
 
-        <section className="comments">
+        {/* Comments */}
+        <section className="comments-section">
+          <h2>Comments</h2>
           <CommentForm postId={post.id} />
           <CommentList postId={post.id} />
         </section>
-      </div>
-    </article>
+      </article>
+    </div>
   );
 }
