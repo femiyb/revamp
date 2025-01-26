@@ -16,6 +16,7 @@ export default function Header() {
           <ul className="flex space-x-8 text-black">
             <li><a href="/" className="hover:text-teal-500">Home</a></li>
             <li><a href="/about" className="hover:text-teal-500">About Me</a></li>
+            <li><a href="/talks" className="text-gray-700 hover:text-teal-500">Talks</a></li>
             <li><a href="/blog" className="hover:text-teal-500">Blog</a></li>
             <li><a href="/contact" className="hover:text-teal-500">Contact</a></li>
           </ul>
