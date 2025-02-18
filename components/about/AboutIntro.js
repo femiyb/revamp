@@ -4,7 +4,7 @@ export default function AboutIntro() {
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center">
           {/* Left: Intro Text */}
           <div className="md:w-1/2 space-y-6">
-            <h2 className="text-3xl font-bold text-teal-500">A Little About Me</h2>
+            <h2 className="text-3xl font-bold text-tealCustom4">A Little About Me</h2>
             <p className="text-lg text-gray-700 leading-relaxed">
               I’m a web developer and digital accessibility advocate with a focus
               on creating inclusive, accessible online experiences. Currently

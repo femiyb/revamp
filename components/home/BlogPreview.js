@@ -1,4 +1,6 @@
 "use client"; // Required for client-side fetching
+import Link from "next/link";
+
 
 import { useEffect, useState } from "react";
 
@@ -80,12 +82,12 @@ export default function BlogPreview() {
         </div>
 
         {/* View More Blog Button */}
-        <a
+        <Link
           href="/blog"
           className="mt-8 inline-block bg-nvdarkbg text-white font-bold py-2 px-4 rounded shadow hover:bg-teal-600 transition"
         >
           Read My Blog
-        </a>
+        </Link>
       </div>
     </section>
   );

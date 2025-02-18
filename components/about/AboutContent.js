@@ -8,7 +8,7 @@ export default function AboutContent() {
   
           {/* What I Do Section */}
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-teal-500 mb-6">What I Do</h2>
+            <h2 className="text-3xl font-bold text-tealCustom4 mb-6">What I Do</h2>
             <ul className="list-disc list-inside space-y-4">
               <li><strong>Web Development:</strong> Building custom WordPress themes and plugins for unique client needs.</li>
               <li><strong>Accessibility Advocacy:</strong> Creating accessible websites compliant with WCAG standards.</li>
@@ -20,7 +20,7 @@ export default function AboutContent() {
   
           {/* Technologies Section */}
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-teal-500 mb-6">Technologies I Work With</h2>
+            <h2 className="text-3xl font-bold text-tealCustom4 mb-6">Technologies I Work With</h2>
             <div className="flex flex-wrap gap-4">
               <span className="px-4 py-2 bg-gray-100 rounded shadow">WordPress</span>
               <span className="px-4 py-2 bg-gray-100 rounded shadow">PHP</span>
@@ -33,7 +33,7 @@ export default function AboutContent() {
   
           {/* Experience Section */}
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-teal-500 mb-6">Latest Work Experience</h2>
+            <h2 className="text-3xl font-bold text-tealCustom4 mb-6">Latest Work Experience</h2>
             <ul className="space-y-4">
               <li><strong>Syde GmbH:</strong> Technical Support Engineer</li>
               <li><strong>Newsletter Glue:</strong> Technical Support Engineer</li>

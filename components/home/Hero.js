@@ -1,4 +1,6 @@
 // File: components/Hero.js
+import Link from "next/link";
+
 
 export default function Hero() {
   return (
@@ -23,10 +25,12 @@ export default function Hero() {
             I specialize in WordPress and software development. Currently
             working as a Technical Support Engineer at Syde GmbH, I also develop
             WordPress themes and plugins.
-          </p>
+          </p><br />
+          <Link href="/about">
           <button className="bg-tealCustom3 text-white font-bold py-3 px-6 rounded-md shadow hover:bg-gray-200 hover:text-tealCustom4 transition">
             About Me
           </button>
+          </Link>
         </div>
       </div>
     </section>
