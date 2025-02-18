@@ -8,6 +8,13 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
 
 /* Container for the entire post */
 .post-container {
@@ -63,3 +70,45 @@ body {
     margin-top: 40px;
   }
   
+  /* Ensure all imported WordPress content is styled properly */
+.prose h1 {
+  font-size: 2rem; /* Match WordPress Heading Size */
+  font-weight: bold;
+}
+
+.prose h2 {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.prose h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.prose p {
+  margin-bottom: 1rem; /* Adds spacing between paragraphs */
+  line-height: 1.8; /* Matches WordPress readability */
+}
+
+.prose ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.prose strong {
+  font-weight: bold;
+}
+
+.prose a {
+  color: #23787d;
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 30px;
+}

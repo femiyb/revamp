@@ -4,11 +4,13 @@ import Footer from "@/components/common/Footer";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="bg-gray-100">
-        <Header />
-        <main>{children}</main>
-        <Footer />
+    <html lang="en" className="h-full">
+      <body className="bg-gray-100 h-full flex flex-col">
+        <div className="flex flex-col min-h-screen w-full">
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

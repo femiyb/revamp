@@ -58,7 +58,7 @@ export default function Talks() {
             >
               {/* Event Name & Date */}
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-2xl font-semibold text-teal-600 flex items-center gap-2">
+                <h3 className="text-2xl font-semibold text-tealCustom4 flex items-center gap-2">
                   📢 {talk.eventName}
                 </h3>
                 <p className="text-gray-500 text-sm flex items-center gap-1">
@@ -76,7 +76,7 @@ export default function Talks() {
                 href={talk.sessionUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-teal-500 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-teal-600 transition"
+                className="flex items-center gap-2 bg-nvdarkbg text-white text-sm font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-teal-600 transition"
               >
                 🎤 View Session
               </a>
@@ -85,7 +85,7 @@ export default function Talks() {
                   href={talk.eventUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-gray-800 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-900 transition"
+                  className="flex items-center gap-2 bg-gray-800 text-tealCustom4 text-sm font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-900 transition"
                 >
                   🌍 View Event
                 </a>
@@ -115,7 +115,7 @@ export default function Talks() {
         <div className="flex flex-wrap justify-center gap-4">
           <a
             href="/contact"
-            className="bg-teal-500 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-teal-600 transition"
+            className="bg-nvdarkbg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-teal-600 transition"
           >
             📩 Invite Me to Speak
           </a>
@@ -123,7 +123,7 @@ export default function Talks() {
             href="https://sessionize.com/samuel-femi-taiwo/"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-teal-500 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-teal-600 transition"
+            className="bg-nvdarkbg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-teal-600 transition"
           >
             🔗 View My Sessionize Profile
           </a>

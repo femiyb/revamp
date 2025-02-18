@@ -1,5 +1,6 @@
 import CommentForm from "@/components/blog/CommentForm";
 import CommentList from "@/components/blog/CommentList";
+import ScrollToHash from "@/components/blog/ScrollToHash"; 
 
 export async function generateStaticParams() {
   try {
@@ -45,13 +46,42 @@ export default async function BlogPostPage({ params }) {
       )}`
     : rawImage;
 
-  const updatedContent = post.content.rendered.replace(
-    /https:\/\/www\.femiyb\.com\/wp-content\/uploads\/([^">]+)/g,
-    (match, path) => `/api/images?path=${encodeURIComponent(path)}`
-  );
+    const updatedContent = post.content.rendered
+  // Rewrite `src` attributes to use your API
+  .replace(
+    /src="https:\/\/www\.femiyb\.com\/wp-content\/uploads\/([^"]+)"/g,
+    (match, path) => `src="/api/images?path=${encodeURIComponent(path)}"`
+  )
+  // Rewrite `srcset` attributes properly
+  .replace(
+    /srcset="([^"]+)"/g,
+    (match, srcset) => {
+      const updatedSrcset = srcset
+        .split(",") // Split each `srcset` entry
+        .map((entry) => {
+          const parts = entry.trim().split(" "); // Separate URL and size
+          const url = parts[0]; // Extract URL
+          const size = parts[1] || ""; // Extract size if present
 
+          if (url.startsWith("https://www.femiyb.com/wp-content/uploads/")) {
+            const newUrl = `/api/images?path=${encodeURIComponent(
+              url.replace("https://www.femiyb.com/wp-content/uploads/", "")
+            )}`;
+            return `${newUrl} ${size}`.trim();
+          }
+
+          return entry.trim(); // Keep original if not a WordPress image
+        })
+        .join(", "); // Reassemble `srcset`
+
+      return `srcset="${updatedSrcset}"`;
+    }
+  );
+  
   return (
     <div className="post-container">
+      <ScrollToHash /> {/* This enables smooth scrolling to hash links */}
+
       <article className="post-article">
         {/* Post Title */}
         <h1 className="post-title">{post.title.rendered}</h1>
@@ -66,7 +96,7 @@ export default async function BlogPostPage({ params }) {
         </p>
 
         {/* Featured Image */}
-        <img
+        <img width="930" height="620"
           src={featuredImage}
           alt={post.title.rendered}
           className="featured-image"
@@ -74,7 +104,7 @@ export default async function BlogPostPage({ params }) {
 
         {/* Post Content */}
         <div
-          className="post-content"
+          className="post-content prose prose-lg prose-gray max-w-none leading-relaxed"
           dangerouslySetInnerHTML={{ __html: updatedContent }}
         ></div>
 
