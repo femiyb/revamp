@@ -5,7 +5,7 @@ export default function BlogContainer({ posts }) {
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4">
         <h1 className="text-3xl md:text-4xl font-bold text-teal-500 mb-8 text-center">
-          Blog Posts
+          BLOG POSTS
         </h1>
 
         {/* Responsive Grid for Posts */}
