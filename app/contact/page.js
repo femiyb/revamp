@@ -48,10 +48,10 @@ export default function ContactPage() {
           <div className="text-center mt-6">
             <p className="text-lg text-gray-700 mb-2">Prefer email?</p>
             <a
-              href="mailto:mail@femiyb.com"
+              href="mailto:mail@femiyb.me"
               className="text-tealCustom4 font-bold hover:underline"
             >
-              mail[@]femiyb.com
+              mail[@]femiyb.me
             </a>
           </div>
 
