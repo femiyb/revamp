@@ -15,7 +15,7 @@ export default function BlogContainer({ posts }) {
             const featuredImage = rawImage.includes('app.femiyb.me')
               ? `/api/images?path=${encodeURIComponent(
                   rawImage.replace(
-                    'https://www.app.femiyb.me/wp-content/uploads/',
+                    'https://app.femiyb.me/wp-content/uploads/',
                     ''
                   )
                 )}`

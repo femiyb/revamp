@@ -70,16 +70,16 @@ export default async function BlogPostPage({ params }) {
     post._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
     '/default-image.jpg';
 
-  const featuredImage = rawImage.includes('www.app.femiyb.me')
+  const featuredImage = rawImage.includes('app.femiyb.me')
     ? `/api/images?path=${encodeURIComponent(
-        rawImage.replace('https://www.app.femiyb.me/wp-content/uploads/', '')
+        rawImage.replace('https://app.femiyb.me/wp-content/uploads/', '')
       )}`
     : rawImage;
 
   const updatedContent = post.content.rendered
     // Rewrite `src` attributes to use your API
     .replace(
-      /src="https:\/\/app\.femiyb\.com\/wp-content\/uploads\/([^"]+)"/g,
+      /src="https:\/\/app\.femiyb\.me\/wp-content\/uploads\/([^"]+)"/g,
       (match, path) => `src="/api/images?path=${encodeURIComponent(path)}"`
     )
     // Rewrite `srcset` attributes properly
@@ -92,10 +92,10 @@ export default async function BlogPostPage({ params }) {
           const size = parts[1] || ''; // Extract size if present
 
           if (
-            url.startsWith('https://www.app.femiyb.me/wp-content/uploads/')
+            url.startsWith('https://app.femiyb.me/wp-content/uploads/')
           ) {
             const newUrl = `/api/images?path=${encodeURIComponent(
-              url.replace('https://www.app.femiyb.me/wp-content/uploads/', '')
+              url.replace('https://app.femiyb.me/wp-content/uploads/', '')
             )}`;
             return `${newUrl} ${size}`.trim();
           }
