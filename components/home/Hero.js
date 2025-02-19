@@ -1,6 +1,5 @@
 // File: components/Hero.js
-import Link from "next/link";
-
+import Link from 'next/link';
 
 export default function Hero() {
   return (
@@ -10,7 +9,7 @@ export default function Hero() {
         <div className="md:w-1/3 flex justify-center">
           <img
             src="/assets/images/samuel-femi-taiwo_original-e1736284460605.png"
-            alt="Femi's Illustration" 
+            alt="Femi's Illustration"
             className="w-full h-auto max-w-sm"
           />
         </div>
@@ -25,11 +24,12 @@ export default function Hero() {
             I specialize in WordPress and software development. Currently
             working as a Technical Support Engineer at Syde GmbH, I also develop
             WordPress themes and plugins.
-          </p><br />
+          </p>
+          <br />
           <Link href="/about">
-          <button className="bg-tealCustom3 text-white font-bold py-3 px-6 rounded-md shadow hover:bg-gray-200 hover:text-tealCustom4 transition">
-            About Me
-          </button>
+            <button className="bg-tealCustom3 text-white font-bold py-3 px-6 rounded-md shadow hover:bg-gray-200 hover:text-tealCustom4 transition">
+              About Me
+            </button>
           </Link>
         </div>
       </div>

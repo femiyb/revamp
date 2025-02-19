@@ -1,22 +1,22 @@
-"use client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+'use client';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function ScrollToHash() {
   const router = useRouter();
 
   useEffect(() => {
     function scrollToHash(hash) {
-      const targetId = hash.replace("#", ""); // Remove #
+      const targetId = hash.replace('#', ''); // Remove #
       const targetElement = document.getElementById(targetId);
 
       if (targetElement) {
-        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
 
     function handleClick(event) {
-      const target = event.target.closest("a");
+      const target = event.target.closest('a');
 
       if (target && target.hash) {
         event.preventDefault(); // Stop default behavior (prevent page reload)
@@ -32,10 +32,10 @@ export default function ScrollToHash() {
     }
 
     // Listen for clicks on hash links
-    document.addEventListener("click", handleClick);
+    document.addEventListener('click', handleClick);
 
     return () => {
-      document.removeEventListener("click", handleClick);
+      document.removeEventListener('click', handleClick);
     };
   }, [router]);
 

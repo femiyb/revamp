@@ -1,8 +1,7 @@
-"use client"; // Required for client-side fetching
-import Link from "next/link";
+'use client'; // Required for client-side fetching
+import Link from 'next/link';
 
-
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export default function BlogPreview() {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -16,7 +15,7 @@ export default function BlogPreview() {
         const data = await response.json();
         setBlogPosts(data);
       } catch (error) {
-        console.error("Error fetching blog posts:", error);
+        console.error('Error fetching blog posts:', error);
       }
     };
 
@@ -26,12 +25,12 @@ export default function BlogPreview() {
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold text-tealCustom4 mb-8">
-      Experience Meets Expertise
+        <h2 className="text-3xl md:text-4xl font-bold text-tealCustom4 mb-8">
+          Experience Meets Expertise
         </h2>
         <p className="text-lg text-gray-700 mb-8">
-          Discover insights and practical advice on accessibility, WordPress development, and more. 
-          Check out my latest articles!
+          Discover insights and practical advice on accessibility, WordPress
+          development, and more. Check out my latest articles!
         </p>
 
         {/* Blog Posts Grid */}
@@ -39,11 +38,15 @@ export default function BlogPreview() {
           {blogPosts.length > 0 ? (
             blogPosts.map((post) => {
               const rawImage =
-                post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "/default-image.jpg";
+                post._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
+                '/default-image.jpg';
 
-              const featuredImage = rawImage.includes("femiyb.com")
+              const featuredImage = rawImage.includes('app.femiyb.com')
                 ? `/api/images?path=${encodeURIComponent(
-                    rawImage.replace("https://www.femiyb.com/wp-content/uploads/", "")
+                    rawImage.replace(
+                      'https://www.app.femiyb.com/wp-content/uploads/',
+                      ''
+                    )
                   )}`
                 : rawImage;
 
@@ -67,9 +70,9 @@ export default function BlogPreview() {
                     </h3>
                     <p className="text-gray-300 text-sm">
                       {new Date(post.date).toLocaleDateString(undefined, {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
                       })}
                     </p>
                   </div>

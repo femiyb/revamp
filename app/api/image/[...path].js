@@ -1,7 +1,7 @@
-import { createProxyMiddleware } from "http-proxy-middleware";
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
 // WordPress uploads base URL
-const IMAGE_BASE_URL = "https://www.femiyb.com/wp-content/uploads";
+const IMAGE_BASE_URL = 'https://www.app.femiyb.com/wp-content/uploads';
 
 export const config = {
   api: {
@@ -14,17 +14,17 @@ export default createProxyMiddleware({
   target: IMAGE_BASE_URL, // Target URL for proxying
   changeOrigin: true, // Changes the origin of the host header to the target URL
   pathRewrite: {
-    "^/api/image": "", // Removes "/api/image" from the request path
+    '^/api/image': '', // Removes "/api/image" from the request path
   },
   onProxyReq: (proxyReq, req, res) => {
-    console.log("Original Request Path:", req.url); // Logs the incoming request URL
-    console.log("Proxied Path:", proxyReq.path); // Logs the rewritten path
+    console.log('Original Request Path:', req.url); // Logs the incoming request URL
+    console.log('Proxied Path:', proxyReq.path); // Logs the rewritten path
   },
   onProxyRes: (proxyRes, req, res) => {
-    console.log("Response received with status:", proxyRes.statusCode); // Logs the response status
+    console.log('Response received with status:', proxyRes.statusCode); // Logs the response status
   },
   onError: (err, req, res) => {
-    console.error("Proxy Error:", err.message); // Logs errors
-    res.status(500).send("Proxy error occurred");
+    console.error('Proxy Error:', err.message); // Logs errors
+    res.status(500).send('Proxy error occurred');
   },
 });

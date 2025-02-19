@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function BlogImage({ imageUrl, altText }) {
   return (
@@ -8,9 +8,9 @@ export default function BlogImage({ imageUrl, altText }) {
       width={800}
       height={600}
       layout="responsive"
-      loading="lazy"  // Lazy loading
-      placeholder="blur"  // Optional: Add a blur effect while loading
-      blurDataURL="/assets/placeholder.png"  // Optional: Low-quality placeholder
+      loading="lazy" // Lazy loading
+      placeholder="blur" // Optional: Add a blur effect while loading
+      blurDataURL="/assets/placeholder.png" // Optional: Low-quality placeholder
     />
   );
 }

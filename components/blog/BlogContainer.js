@@ -1,4 +1,4 @@
-"use client";  // Required for interactivity if any
+'use client'; // Required for interactivity if any
 
 export default function BlogContainer({ posts }) {
   return (
@@ -9,11 +9,15 @@ export default function BlogContainer({ posts }) {
           {posts.map((post) => {
             // Proxy the featured image through the React app
             const rawImage =
-              post._embedded?.['wp:featuredmedia']?.[0]?.source_url || "/default-image.jpg";
+              post._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
+              '/default-image.jpg';
 
-            const featuredImage = rawImage.includes("femiyb.com")
+            const featuredImage = rawImage.includes('app.femiyb.com')
               ? `/api/images?path=${encodeURIComponent(
-                  rawImage.replace("https://www.femiyb.com/wp-content/uploads/", "")
+                  rawImage.replace(
+                    'https://www.app.femiyb.com/wp-content/uploads/',
+                    ''
+                  )
                 )}`
               : rawImage;
 
@@ -37,9 +41,9 @@ export default function BlogContainer({ posts }) {
                   </h3>
                   <p className="text-gray-300 text-sm">
                     {new Date(post.date).toLocaleDateString(undefined, {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
                     })}
                   </p>
                 </div>

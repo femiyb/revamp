@@ -1,11 +1,11 @@
-"use client";
-import { useState } from "react";
+'use client';
+import { useState } from 'react';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
+    name: '',
+    email: '',
+    message: '',
   });
   const [status, setStatus] = useState(null);
 
@@ -21,12 +21,12 @@ export default function ContactForm() {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_WPFORMS_API_URL}/forms/submit`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            id: "65940", // Replace with the actual Form ID
+            id: '65940', // Replace with the actual Form ID
             fields: {
               name: formData.name,
               email: formData.email,
@@ -39,14 +39,14 @@ export default function ContactForm() {
       const result = await response.json();
 
       if (response.ok) {
-        setStatus("Form submitted successfully!");
-        setFormData({ name: "", email: "", message: "" });
+        setStatus('Form submitted successfully!');
+        setFormData({ name: '', email: '', message: '' });
       } else {
-        setStatus(result.message || "An error occurred.");
+        setStatus(result.message || 'An error occurred.');
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      setStatus("An unexpected error occurred.");
+      console.error('Error submitting form:', error);
+      setStatus('An unexpected error occurred.');
     }
   };
 

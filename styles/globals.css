@@ -8,69 +8,70 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
-
-
 /* Container for the entire post */
 .post-container {
-    max-width: 1140px;    /* Matches the box model width */
-    margin: 0 auto;       /* Centers the content */
-    padding: 0 15px;      /* Consistent side padding */
-    box-sizing: border-box;
-  }
-  
-  /* Article styling */
-  .post-article {
-    background-color: #fff;
-    padding: 30px;       /* Internal padding */
-    border-radius: 8px;  /* Smooth corners */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Title styling */
-  .post-title {
-    font-size: 2.8rem;
-    font-weight: 800;
-    color: #222;
-    margin-bottom: 10px;
-    line-height: 1.2;
-  }
-  
-  /* Post date styling */
-  .post-date {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 20px;
-  }
-  
-  /* Featured image styling */
-  .featured-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 30px;
-    object-fit: cover;
-  }
-  
-  /* Post content styling */
-  .post-content {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #333;
-    word-break: break-word;
-  }
-  
-  /* Comments section */
-  .comments-section {
-    margin-top: 40px;
-  }
-  
-  /* Ensure all imported WordPress content is styled properly */
+  max-width: 1140px; /* Matches the box model width */
+  margin: 0 auto; /* Centers the content */
+  padding: 0 15px; /* Consistent side padding */
+  box-sizing: border-box;
+}
+
+/* Article styling */
+.post-article {
+  background-color: #fff;
+  padding: 30px; /* Internal padding */
+  border-radius: 8px; /* Smooth corners */
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.post-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #222;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+/* Post date styling */
+.post-date {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Featured image styling */
+.featured-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  object-fit: cover;
+}
+
+/* Post content styling */
+.post-content {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+  word-break: break-word;
+}
+
+/* Comments section */
+.comments-section {
+  margin-top: 40px;
+}
+
+/* Ensure all imported WordPress content is styled properly */
 .prose h1 {
   font-size: 2rem; /* Match WordPress Heading Size */
   font-weight: bold;
@@ -109,6 +110,11 @@ html, body {
   text-decoration: underline;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-bottom: 30px;
 }

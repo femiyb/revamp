@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export default function CommentList({ postId }) {
   const [comments, setComments] = useState([]);
@@ -15,7 +15,7 @@ export default function CommentList({ postId }) {
         const data = await res.json();
         setComments(data);
       } catch (error) {
-        console.error("Error fetching comments:", error);
+        console.error('Error fetching comments:', error);
       } finally {
         setLoading(false);
       }

@@ -1,4 +1,4 @@
-import TalkCard from "./TalkCard";
+import TalkCard from './TalkCard';
 
 export default function TalksList({ talks }) {
   return (
