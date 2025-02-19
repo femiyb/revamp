@@ -1,10 +1,14 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function CommentForm({ postId }) {
-  const [formData, setFormData] = useState({ name: "", email: "", comment: "" });
-  const [responseMessage, setResponseMessage] = useState("");
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    comment: '',
+  });
+  const [responseMessage, setResponseMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
@@ -15,15 +19,15 @@ export default function CommentForm({ postId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setResponseMessage("");
+    setResponseMessage('');
 
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp/v2/comments`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             post: postId,
@@ -35,14 +39,14 @@ export default function CommentForm({ postId }) {
       );
 
       if (response.ok) {
-        setResponseMessage("Comment submitted successfully!");
-        setFormData({ name: "", email: "", comment: "" });
+        setResponseMessage('Comment submitted successfully!');
+        setFormData({ name: '', email: '', comment: '' });
       } else {
         const errorData = await response.json();
-        setResponseMessage(errorData.message || "Failed to submit comment.");
+        setResponseMessage(errorData.message || 'Failed to submit comment.');
       }
     } catch (error) {
-      setResponseMessage("Error submitting comment.");
+      setResponseMessage('Error submitting comment.');
     } finally {
       setIsSubmitting(false);
     }
@@ -90,7 +94,7 @@ export default function CommentForm({ postId }) {
         className="bg-teal-500 text-white py-2 px-4 rounded hover:bg-teal-600"
         disabled={isSubmitting}
       >
-        {isSubmitting ? "Submitting..." : "Submit"}
+        {isSubmitting ? 'Submitting...' : 'Submit'}
       </button>
     </form>
   );

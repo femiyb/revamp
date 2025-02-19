@@ -1,11 +1,40 @@
-import CommentForm from "@/components/blog/CommentForm";
-import CommentList from "@/components/blog/CommentList";
+import CommentForm from '@/components/blog/CommentForm';
+import CommentList from '@/components/blog/CommentList';
+import ScrollToHash from '@/components/blog/ScrollToHash';
+
+async function fetchPost(slug) {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp/v2/posts?slug=${slug}&_embed`
+    );
+    if (!res.ok) {
+      console.error(`Failed to fetch post for slug: ${slug}`);
+      return null;
+    }
+    const posts = await res.json();
+    return posts.length > 0 ? posts[0] : null;
+  } catch (error) {
+    console.error('Error fetching post:', error);
+    return null;
+  }
+}
+
+
+export async function generateMetadata({ params }) {
+  const post = await fetchPost(params.slug);
+  return {
+    title: post ? `${post.title.rendered} | Femi YB` : 'Post Not Found | Femi YB',
+    description: post ? post.excerpt.rendered : '',
+  };
+}
 
 export async function generateStaticParams() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp/v2/posts?_embed`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp/v2/posts?_embed`
+    );
     if (!res.ok) {
-      console.error("Failed to fetch posts:", res.statusText);
+      console.error('Failed to fetch posts:', res.statusText);
       return [];
     }
     const posts = await res.json();
@@ -13,7 +42,7 @@ export async function generateStaticParams() {
       slug: post.slug,
     }));
   } catch (error) {
-    console.error("Error fetching posts:", error);
+    console.error('Error fetching posts:', error);
     return [];
   }
 }
@@ -37,21 +66,50 @@ export default async function BlogPostPage({ params }) {
     return <div>Post not found.</div>;
   }
 
-  const rawImage = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "/default-image.jpg";
+  const rawImage =
+    post._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
+    '/default-image.jpg';
 
-  const featuredImage = rawImage.includes("femiyb.com")
+  const featuredImage = rawImage.includes('app.femiyb.me')
     ? `/api/images?path=${encodeURIComponent(
-        rawImage.replace("https://www.femiyb.com/wp-content/uploads/", "")
+        rawImage.replace('https://app.femiyb.me/wp-content/uploads/', '')
       )}`
     : rawImage;
 
-  const updatedContent = post.content.rendered.replace(
-    /https:\/\/www\.femiyb\.com\/wp-content\/uploads\/([^">]+)/g,
-    (match, path) => `/api/images?path=${encodeURIComponent(path)}`
-  );
+  const updatedContent = post.content.rendered
+    // Rewrite `src` attributes to use your API
+    .replace(
+      /src="https:\/\/app\.femiyb\.me\/wp-content\/uploads\/([^"]+)"/g,
+      (match, path) => `src="/api/images?path=${encodeURIComponent(path)}"`
+    )
+    // Rewrite `srcset` attributes properly
+    .replace(/srcset="([^"]+)"/g, (match, srcset) => {
+      const updatedSrcset = srcset
+        .split(',') // Split each `srcset` entry
+        .map((entry) => {
+          const parts = entry.trim().split(' '); // Separate URL and size
+          const url = parts[0]; // Extract URL
+          const size = parts[1] || ''; // Extract size if present
+
+          if (
+            url.startsWith('https://app.femiyb.me/wp-content/uploads/')
+          ) {
+            const newUrl = `/api/images?path=${encodeURIComponent(
+              url.replace('https://app.femiyb.me/wp-content/uploads/', '')
+            )}`;
+            return `${newUrl} ${size}`.trim();
+          }
+
+          return entry.trim(); // Keep original if not a WordPress image
+        })
+        .join(', '); // Reassemble `srcset`
+
+      return `srcset="${updatedSrcset}"`;
+    });
 
   return (
     <div className="post-container">
+      <ScrollToHash /> {/* This enables smooth scrolling to hash links */}
       <article className="post-article">
         {/* Post Title */}
         <h1 className="post-title">{post.title.rendered}</h1>
@@ -59,14 +117,16 @@ export default async function BlogPostPage({ params }) {
         {/* Post Date */}
         <p className="post-date">
           {new Date(post.date).toLocaleDateString(undefined, {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
           })}
         </p>
 
         {/* Featured Image */}
         <img
+          width="930"
+          height="620"
           src={featuredImage}
           alt={post.title.rendered}
           className="featured-image"
@@ -74,7 +134,7 @@ export default async function BlogPostPage({ params }) {
 
         {/* Post Content */}
         <div
-          className="post-content"
+          className="post-content prose prose-lg prose-gray max-w-none leading-relaxed"
           dangerouslySetInnerHTML={{ __html: updatedContent }}
         ></div>
 

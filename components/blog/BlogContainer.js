@@ -1,23 +1,23 @@
-"use client";  // Required for interactivity if any
+'use client'; // Required for interactivity if any
 
 export default function BlogContainer({ posts }) {
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-teal-500 mb-8 text-center">
-          Blog Posts
-        </h1>
-
         {/* Responsive Grid for Posts */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => {
             // Proxy the featured image through the React app
             const rawImage =
-              post._embedded?.['wp:featuredmedia']?.[0]?.source_url || "/default-image.jpg";
+              post._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
+              '/default-image.jpg';
 
-            const featuredImage = rawImage.includes("femiyb.com")
+            const featuredImage = rawImage.includes('app.femiyb.me')
               ? `/api/images?path=${encodeURIComponent(
-                  rawImage.replace("https://www.femiyb.com/wp-content/uploads/", "")
+                  rawImage.replace(
+                    'https://app.femiyb.me/wp-content/uploads/',
+                    ''
+                  )
                 )}`
               : rawImage;
 
@@ -41,9 +41,9 @@ export default function BlogContainer({ posts }) {
                   </h3>
                   <p className="text-gray-300 text-sm">
                     {new Date(post.date).toLocaleDateString(undefined, {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
                     })}
                   </p>
                 </div>
