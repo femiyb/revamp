@@ -1,5 +1,9 @@
 import ContactHeader from '@/components/contact/ContactHeader';
 
+export const metadata = {
+  title: "Contact Me | Femi YB",
+};
+
 export default function ContactPage() {
   return (
     <>

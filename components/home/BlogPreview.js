@@ -41,10 +41,10 @@ export default function BlogPreview() {
                 post._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
                 '/default-image.jpg';
 
-              const featuredImage = rawImage.includes('app.femiyb.com')
+              const featuredImage = rawImage.includes('app.femiyb.me')
                 ? `/api/images?path=${encodeURIComponent(
                     rawImage.replace(
-                      'https://www.app.femiyb.com/wp-content/uploads/',
+                      'https://www.app.femiyb.me/wp-content/uploads/',
                       ''
                     )
                   )}`

@@ -6,7 +6,7 @@ export async function GET(req, { params }) {
   const { path } = params;
 
   // Rebuild the WordPress image URL
-  const imageUrl = `https://www.app.femiyb.com/wp-content/uploads/${path.join('/')}`;
+  const imageUrl = `https://www.app.femiyb.me/wp-content/uploads/${path.join('/')}`;
   console.log('Fetching image from:', imageUrl); // This MUST appear!
 
   try {

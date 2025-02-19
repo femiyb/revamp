@@ -1,7 +1,7 @@
 import { createProxyMiddleware } from 'http-proxy-middleware';
 
 // WordPress uploads base URL
-const IMAGE_BASE_URL = 'https://www.app.femiyb.com/wp-content/uploads';
+const IMAGE_BASE_URL = 'https://www.app.femiyb.me/wp-content/uploads';
 
 export const config = {
   api: {

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['www.app.femiyb.com'], // Allow external images from WordPress
+    domains: ['www.app.femiyb.me'], // Allow external images from WordPress
   },
 };
 

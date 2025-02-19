@@ -8,7 +8,7 @@ export async function GET(req) {
     return NextResponse.json({ error: 'Invalid image path' }, { status: 400 });
   }
 
-  const imageUrl = `https://www.app.femiyb.com/wp-content/uploads/${path}`;
+  const imageUrl = `https://www.app.femiyb.me/wp-content/uploads/${path}`;
 
   try {
     const response = await fetch(imageUrl);

@@ -2,6 +2,32 @@ import CommentForm from '@/components/blog/CommentForm';
 import CommentList from '@/components/blog/CommentList';
 import ScrollToHash from '@/components/blog/ScrollToHash';
 
+async function fetchPost(slug) {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp/v2/posts?slug=${slug}&_embed`
+    );
+    if (!res.ok) {
+      console.error(`Failed to fetch post for slug: ${slug}`);
+      return null;
+    }
+    const posts = await res.json();
+    return posts.length > 0 ? posts[0] : null;
+  } catch (error) {
+    console.error('Error fetching post:', error);
+    return null;
+  }
+}
+
+
+export async function generateMetadata({ params }) {
+  const post = await fetchPost(params.slug);
+  return {
+    title: post ? `${post.title.rendered} | Femi YB` : 'Post Not Found | Femi YB',
+    description: post ? post.excerpt.rendered : '',
+  };
+}
+
 export async function generateStaticParams() {
   try {
     const res = await fetch(
@@ -44,9 +70,9 @@ export default async function BlogPostPage({ params }) {
     post._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
     '/default-image.jpg';
 
-  const featuredImage = rawImage.includes('www.app.femiyb.com')
+  const featuredImage = rawImage.includes('www.app.femiyb.me')
     ? `/api/images?path=${encodeURIComponent(
-        rawImage.replace('https://www.app.femiyb.com/wp-content/uploads/', '')
+        rawImage.replace('https://www.app.femiyb.me/wp-content/uploads/', '')
       )}`
     : rawImage;
 
@@ -65,9 +91,11 @@ export default async function BlogPostPage({ params }) {
           const url = parts[0]; // Extract URL
           const size = parts[1] || ''; // Extract size if present
 
-          if (url.startsWith('https://www.app.femiyb.com/wp-content/uploads/')) {
+          if (
+            url.startsWith('https://www.app.femiyb.me/wp-content/uploads/')
+          ) {
             const newUrl = `/api/images?path=${encodeURIComponent(
-              url.replace('https://www.app.femiyb.com/wp-content/uploads/', '')
+              url.replace('https://www.app.femiyb.me/wp-content/uploads/', '')
             )}`;
             return `${newUrl} ${size}`.trim();
           }

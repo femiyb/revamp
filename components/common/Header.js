@@ -6,7 +6,7 @@ export default function Header() {
         <div className="flex items-center space-x-2">
           <a href="/">
             <img
-              src="https://www.app.femiyb.com/wp-content/uploads/2021/10/cropped-Femi-1.png"
+              src="https://www.app.femiyb.me/wp-content/uploads/2021/10/cropped-Femi-1.png"
               alt="Clued YB Logo"
               className="h-8"
             />

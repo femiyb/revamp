@@ -29,7 +29,7 @@ export default function AboutIntro() {
         {/* Right: Avatar */}
         <div className="md:w-1/2 flex justify-center mt-8 md:mt-0">
           <img
-            src="https://www.app.femiyb.com/wp-content/uploads/2022/01/hoodie_samuel-femi-taiwo-332x1024.png"
+            src="https://www.app.femiyb.me/wp-content/uploads/2022/01/hoodie_samuel-femi-taiwo-332x1024.png"
             alt="Femi Avatar"
             className="w-64 h-auto"
           />
